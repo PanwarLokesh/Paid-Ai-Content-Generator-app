@@ -1,5 +1,5 @@
 const { message } = require("prompt");
-const { User } = require("../models/User.model");
+const User = require("../models/User.model");
 const bcrypt = require("bcryptjs");
 
 //!----Registration-----
@@ -35,7 +35,11 @@ const register = async (req, res) => {
       },
     });
   } catch (error) {
-    new Error(error);
+    // new Error(error);
+    console.error(error.message);
+    res.json({
+      message: error.message,
+    });
   }
 };
 
