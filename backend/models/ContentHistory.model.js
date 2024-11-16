@@ -5,7 +5,7 @@ const historySchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    constent: {
+    content: {
       type: String,
       required: true,
     },
@@ -14,5 +14,5 @@ const historySchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const  ContentHistory = mongoose.model("Payment", historySchema);
+const ContentHistory = mongoose.model("Payment", historySchema);
 module.exports = ContentHistory;
