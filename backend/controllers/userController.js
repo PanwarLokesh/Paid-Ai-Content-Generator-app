@@ -60,7 +60,7 @@ const login = asyncHandler(async (req,res)=>{
       process.env.JWT_SECRET,
       {expiresIn: "3d"}
     )
-    console.log("token",token);
+    // console.log("token",token);
 
     res.cookie("token",token,{
       httpOnly: true,
@@ -89,7 +89,7 @@ const logout = asyncHandler(async (req,res)=>{
 
 //!-------user profile--------
 const userProfile = asyncHandler(async (req,res)=>{
-  const id= req.user.id
+  const id= req?.user?.id
   const user = await User.findById(id).select("-password");
   if(user){
     res.status(200).json({

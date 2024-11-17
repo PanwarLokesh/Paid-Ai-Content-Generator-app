@@ -39,6 +39,8 @@ const geminiApiController = asyncHandler(async (req, res) => {
 
         const userFound = await User.findById(req?.user?.id);
         userFound.history.push(newContent?._id);
+        //!update api request count
+        userFound.apiRequestCount += 1;
         await userFound.save();
         res.status(200).json(content);
     }

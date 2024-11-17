@@ -13,9 +13,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    trialPeriod:{
+    trialPeriod: {
       type: Number,
-      default:3
+      default: 3,
     },
     trialActive: {
       type: Boolean,
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema(
     },
     monthlyRequestCount: {
       type: Number,
-      default: 0,
+      default: 100,
     },
     nextBillingDate: Date,
     payments: [
@@ -52,8 +52,15 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+//! Add virtual property
+userSchema.virtual("isTrialActive").get(function () {
+  return this.trialActive && new Date() < this.trialExpires;
+});
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
